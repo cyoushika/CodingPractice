@@ -3,37 +3,42 @@
 #include<iostream>
 using namespace std;
 
-int a[10] = {10,9,8,7,6,5,4,3,2,1};
+int a[10] = {10,9,1,7,8,5,8,1,2,1};
 
-int compareMyType(const void *a, const void *b){
-  return (*(int*)a - *(int*)b);
+// int compareMyType(const void *a, const void *b){
+//   return (*(int*)a - *(int*)b);
+// }
+
+
+
+void qsort(int l,int r,int a[]){
+  int i = l;
+  int j = r;
+  int w = a[(l+r)/2];
+  while(i<=j){
+    while(a[i]<w) i++;
+    while(a[j]>w) j--;
+    if(i<=j){
+      int tmp = a[i];
+      a[i] = a[j];
+      a[j] = tmp;
+      i++;
+      j--;
+    }
+  }
+  if(l<j) qsort(l,j,a);
+  if(i<r) qsort(i,r,a);
 }
 
 int main(){
-  qsort(a,10,sizeof(int),compareMyType);
+  //qsort(a,10,sizeof(int),compareMyType);
+  qsort(0,9,a);
   for(int i=0;i<10;i++){
     printf("%d ",a[i]);
   }
   printf("\n");
 }
-// void qsort(int l,int r,int a[]){
-//   int i = l;
-//   int j = r;
-//   int w = (l+r)/2;
-//   while(i<=j){
-//     while(a[i]<a[w]) i++;
-//     while(a[j]>a[w]) j--;
-//     if(i<=j){
-//       int tmp = a[i];
-//       a[i] = a[j];
-//       a[j] = tmp;
-//       i++;
-//       j--;
-//     }
-//   }
-//   if(l<j) qsort(l,j,a);
-//   if(i<r) qsort(i,r,a);
-// }
+
 //
 // int main(){
 //   int n;
